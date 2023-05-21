@@ -83,7 +83,7 @@ jobs:
       - name: Build and Upload to App Store
         uses: maierj/fastlane-action@v3.0.0
         with:
-          lane: 'ios testflight'
+          lane: 'ios-testflight'
           bundler-cache: true
         env:
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
