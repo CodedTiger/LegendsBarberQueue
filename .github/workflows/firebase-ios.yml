@@ -1,0 +1,77 @@
+name: Firebase - iOS Beta Build
+
+# Manual deployment
+on: workflow_dispatch
+
+jobs:
+  firebase-build:
+    name: ios-beta-build-firebase
+    runs-on: [self-hosted, X64, macos]
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      # Setup Node
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install XCodes
+        run: |
+          brew install robotsandpencils/made/xcodes
+          xcodes install 14.2
+
+      # Checkout the Repository
+      - name: Checkout Git Repository
+        uses: actions/checkout@v3
+
+      # Update our Google Service File
+      - name: Setup Firebase File
+        run: echo "${{ secrets.PROD_IOS_FIREBASE_FILE }}" > ./ios/GoogleService-Info.plist
+
+      # I have a script that generates an environment file based on what environment I point to. I am setting up the
+      # production one here. It points to my production API's and does some other stuff.
+      - name: Setup Environment File
+        run: npm run env:prod
+
+      # Setup our Firebase Service Account file
+      - name: Setup Service Account Credential Files
+        run: echo "${{secrets.FIREBASE_SERVICE_ACCOUNT_JSON}}" > "${{ github.workspace }}/firebase-service-account.json"
+
+      # Install NPM Packages
+      - name: Install npm Dependencies
+        run: npm install
+
+      # Setup Ruby while Caching Gems
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.2
+          bundler-cache: true
+
+      # Add Fastlane plugins
+      #    brew install fastlane
+      - name: Add Fastlane Plugins
+        run: |
+          gem install fastlane
+          fastlane add_plugin firebase_app_distribution
+
+      # Setup our App Store Service Account file
+      - name: Setup Service Account Credential Files
+        run: echo "${{ secrets.APPLE_API_KEY_FILE }}" > "${{ github.workspace }}/AppleApiKey.p8"
+
+      # Finally, build and release (calls the android firebase lane in our fastfile)
+      - name: Build and Upload to Firebase
+        uses: maierj/fastlane-action@v3.0.0
+        with:
+          lane: 'ios firebase'
+          bundler-cache: true
+        env:
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          FIREBASE_APPLE_APP_ID: ${{ secrets.FIREBASE_APPLE_APP_ID }}
+          BUNDLE_ID: ${{ secrets.BUNDLE_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          GIT_PERSONAL_ACCESS_TOKEN: ${{ secrets.GIT_PERSONAL_ACCESS_TOKEN }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: '120'
