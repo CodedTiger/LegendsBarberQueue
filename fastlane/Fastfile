@@ -1,11 +1,11 @@
-xcodeproj = File.absolute_path('../ios/AppName.xcodeproj')
-xcworkspace = File.absolute_path('../ios/AppName.xcworkspace')
-github_match_url = "https://github.com/Org-Name/certificate-manager"
+xcodeproj = File.absolute_path('../ios/LegendBarberQueue.xcodeproj')
+xcworkspace = File.absolute_path('../ios/LegendBarberQueue.xcworkspace')
+github_match_url = "https://github.com/CodedTiger/aps-certificate-manager"
 firebase_android_distribution_groups = "qa-team"
 firebase_ios_distribution_groups = "qa-team"
 android_commit_message = "[ci skip] Version Bump: #{ENV['VERSION_NAME']} (#{ENV['VERSION_CODE']})"
 ios_commit_message = "[ci skip] Version Bump: #{ENV['VERSION_NUMBER']} (#{ENV['BUILD_NUMBER']})"
-plist_file_path = "../ios/Legend Barber Queue/Info.plist"
+plist_file_path = "../ios/LegendBarberQueue/Info.plist"
 adhoc_provision_file = "match AdHoc com.arkpixelstudio.legendbaberqueue"
 appstore_provision_file = "match AppStore com.arkpixelstudio.legendbaberqueue"
 ios_app_scheme = "Legend Barber Queue"
