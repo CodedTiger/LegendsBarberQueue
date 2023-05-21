@@ -72,8 +72,8 @@ jobs:
       # Setup Fastlane Plugins
       - name: Add Fastlane Plugins
         run: |
-          fastlane add_plugin increment_version_code
-          fastlane add_plugin firebase_app_distribution
+          bundle exec fastlane add_plugin increment_version_code
+          bundle exec fastlane add_plugin firebase_app_distribution
 
       # Finally, build and release (calls the android firebase lane in our fastfile)
       - name: Build and Upload Android to Firebase
