@@ -33,7 +33,6 @@ platform :android do
       groups: firebase_android_distribution_groups,
       release_notes: "Lots of amazing new features to test out!",
       firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
-      service_credentials_file: File.absolute_path('../firebase-service-account.json'),
       android_artifact_type: "AAB"
     )
   end
