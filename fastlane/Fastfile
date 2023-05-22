@@ -28,14 +28,13 @@ platform :android do
         "android.injected.signing.key.password" => ENV['ANDROID_KEYSTORE_PASSWORD']
       }
     )
-    firebase_app_distribution(
-      app: ENV['FIREBASE_ANDROID_APP_ID'],
-      groups: firebase_android_distribution_groups,
-      release_notes: "Lots of amazing new features to test out!",
-      firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
-      service_credentials_file: File.absolute_path('../firebase-service-account.json'),
-      android_artifact_type: "AAB"
-    )
+    # firebase_app_distribution(
+    #   app: ENV['FIREBASE_ANDROID_APP_ID'],
+    #   groups: firebase_android_distribution_groups,
+    #   release_notes: "Lots of amazing new features to test out!",
+    #   service_credentials_file: File.absolute_path('../firebase-service-account.json'),
+    #   android_artifact_type: "AAB"
+    # )
   end
   desc "Android Production Build and Deploy to Play Store Beta"
   lane :beta do 
