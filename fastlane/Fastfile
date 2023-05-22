@@ -31,7 +31,8 @@ platform :android do
     firebase_app_distribution(
       app: ENV['FIREBASE_ANDROID_APP_ID'],
       groups: firebase_android_distribution_groups,
-      service_credentials_file: File.absolute_path('../firebase-service-account.json'),
+      release_notes: "Lots of amazing new features to test out!"
+      #service_credentials_file: File.absolute_path('../firebase-service-account.json'),
       android_artifact_type: "AAB"
     )
   end
