@@ -35,6 +35,17 @@ platform :android do
     #   service_credentials_file: File.absolute_path('../firebase-service-account.json'),
     #   android_artifact_type: "AAB"
     # )
+    upload_to_play_store(
+        track: 'beta',
+        aab: File.absolute_path('../android/app/build/outputs/bundle/release/app-release.aab'),
+        release_status: 'draft',
+        package_name: ENV['BUNDLE_ID'],
+        json_key: File.absolute_path('../playstore-service-account.json')
+      )
+      git_commit(
+        path: [File.absolute_path('../android/app/build.gradle')],
+        message: android_commit_message
+      )
   end
   desc "Android Production Build and Deploy to Play Store Beta"
   lane :beta do 
