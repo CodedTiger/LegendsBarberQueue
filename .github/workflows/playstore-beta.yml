@@ -59,8 +59,8 @@ jobs:
       # I have a script that generates an environment file based on what environment I point to. I am setting up the
       # production one here. It points to my production API's and does some other stuff.
       # uncomment this once we have different apis
-      # - name: Setup Environment File
-      #   run: npm run env:prod
+      - name: Setup Environment File
+        run: npm run env:prod
 
       # Setup our Production Keystore file
       - name: Setup Keystore File
