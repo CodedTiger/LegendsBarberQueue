@@ -86,10 +86,10 @@ jobs:
         run: gem install fastlane
 
       # Setup Fastlane Plugins
-      - name: Add Fastlane Plugins
-        run: |
-          fastlane add_plugin increment_version_code
-          fastlane add_plugin increment_version_name
+      # - name: Add Fastlane Plugins
+      #   run: |
+      #     fastlane add_plugin increment_version_code
+      #     fastlane add_plugin increment_version_name
 
       # Setup GitHub name and email for the Auto-Versioning Commit
       - name: Setup Git Config
