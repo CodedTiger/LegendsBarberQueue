@@ -33,13 +33,14 @@ platform :android do
       groups: firebase_android_distribution_groups,
       release_notes: "Lots of amazing new features to test out!",
       firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
+      service_credentials_file: File.absolute_path('../firebase-service-account.json'),
       android_artifact_type: "AAB"
     )
   end
   desc "Android Production Build and Deploy to Play Store Beta"
   lane :beta do 
-    increment_version_code(version_code: ENV['VERSION_CODE'].to_i, gradle_file_path: File.absolute_path('../android/app/build.gradle'))
-    increment_version_name(version_name: ENV['VERSION_NAME'], gradle_file_path: File.absolute_path('../android/app/build.gradle'))
+    # increment_version_code(version_code: ENV['VERSION_CODE'].to_i, gradle_file_path: File.absolute_path('../android/app/build.gradle'))
+    # increment_version_name(version_name: ENV['VERSION_NAME'], gradle_file_path: File.absolute_path('../android/app/build.gradle'))
     gradle(task: 'clean', project_dir: File.absolute_path('../android'))
     gradle(
       task: 'bundle',

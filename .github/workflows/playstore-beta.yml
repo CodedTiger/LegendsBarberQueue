@@ -92,10 +92,10 @@ jobs:
       #     fastlane add_plugin increment_version_name
 
       # Setup GitHub name and email for the Auto-Versioning Commit
-      - name: Setup Git Config
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
+      # - name: Setup Git Config
+      #   run: |
+      #     git config user.name "GitHub Actions Bot"
+      #     git config user.email "<>"
 
       # Finally, build and release (calls the android beta lane in our fastfile)
       - name: Build and Upload to Play Store
