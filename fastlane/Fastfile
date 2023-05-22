@@ -15,7 +15,7 @@ code_signing_identity = "Apple Distribution: APS (46Z55D38V7)"
 platform :android do 
   desc "Android Production Build and Deploy to Firebase App Distribution"
   lane :firebase do 
-    increment_version_code(gradle_file_path: File.absolute_path('../android/app/build.gradle'))
+    #increment_version_code(gradle_file_path: File.absolute_path('../android/app/build.gradle'))
     gradle(task: 'clean', project_dir: File.absolute_path('../android'))
     gradle(
       task: 'bundle',
